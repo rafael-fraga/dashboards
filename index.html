@@ -1,1 +1,39 @@
-<b>Teste</b>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Check</title>
+    <script>
+        async function checkResponse() {
+            try {
+                // Example: Fetching from a hypothetical endpoint
+                const response = await fetch('https://example.com/api/check', {
+                    method: 'GET'
+                });
+
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const result = await response.json();
+
+                // Check if the returned value is 1
+                if (result === "1") {
+                    document.getElementById('status').textContent = 'Ok';
+                } else {
+                    document.getElementById('status').textContent = 'Not Ok';
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                document.getElementById('status').textContent = 'Error occurred';
+            }
+        }
+
+        window.onload = checkResponse;
+    </script>
+</head>
+<body>
+    <h1 id="status">Loading...</h1>
+</body>
+</html>
